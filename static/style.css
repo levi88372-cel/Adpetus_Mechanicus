@@ -1,0 +1,89 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f31010;
+    margin: 0;
+    padding: 0;
+}
+
+.header {
+    background-color: #d32f2f;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    padding: 30px;
+    flex-wrap: wrap;
+}
+
+.card-form, .card-comprovante {
+    background-color: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    width: 420px;
+}
+
+.card-form h2, .card-comprovante h2 {
+    color: #d32f2f;
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+input[type="text"], input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.menu-items {
+    margin-top: 15px;
+}
+
+.item-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.item-row input {
+    width: 60px;
+    text-align: center;
+}
+
+button {
+    width: 100%;
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background-color: #1b5e20;
+}
+
+.total {
+    color: #d32f2f;
+    font-size: 20px;
+}

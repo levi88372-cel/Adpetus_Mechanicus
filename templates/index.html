@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Habib's Digital - Pedidos</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="header">
+        <h1>🔴🧆 HABIB'S DIGITAL 🧆🔴</h1>
+        <p>A maior rede de fast-food árabe do MUNDO diretamente na sua tela!</p>
+    </div>
+
+    <div class="main-container">
+        <!-- FORMULÁRIO DE PEDIDOS -->
+        <form action="/fazer_pedido" method="POST" class="card-form">
+            <h2>Faça seu Pedido</h2>
+            
+            <label>Seu Nome:</label>
+            <input type="text" name="cliente" required placeholder="Ex: João Silva">
+
+            <label>Endereço de Entrega:</label>
+            <input type="text" name="endereco" required placeholder="Ex: Rua das Flores, 123">
+
+            <label>Distância em Km:</label>
+            <input type="number" step="0.1" name="distancia" value="3.0" required>
+
+            <label>Tipo de Entrega:</label>
+            <select name="tipo_entrega">
+                <option value="propria">Habib's Fast Delivery (Própria)</option>
+            </select>
+
+            <h3>Escolha os Itens:</h3>
+            <div class="menu-items">
+                {% for chave, item in cardapio.items() %}
+                    <div class="item-row">
+                        <span><strong>{{ item.nome }}</strong> (R$ {{ "%.2f"|format(item.get_preco()) }})</span>
+                        <input type="number" min="0" value="0" name="qtd_{{ chave }}">
+                    </div>
+                {% endfor %}
+            </div>
+
+            <button type="submit">Enviar Pedido para a Cozinha</button>
+        </form>
+
+        <!-- COMPROVANTE DO PEDIDO (SE HOUVER PEDIDO) -->
+        {% if pedido %}
+        <div class="card-comprovante">
+            <h2>🔴 COMPROVANTE DE PEDIDO 🔴</h2>
+            <p><strong>Cliente:</strong> {{ pedido.cliente }}</p>
+            <p><strong>Endereço:</strong> {{ pedido.endereco }}</p>
+            <p><strong>Previsão:</strong> {{ pedido.tempo }}</p>
+            <hr>
+            <h3>Itens Solicitados:</h3>
+            <ul>
+                {% for item in pedido.itens %}
+                    <li>{{ item.qtd }}x {{ item.nome }} - R$ {{ "%.2f"|format(item.total) }}</li>
+                {% endfor %}
+            </ul>
+            <hr>
+            <p>Subtotal: R$ {{ "%.2f"|format(pedido.subtotal) }}</p>
+            <p>Taxa de Entrega: R$ {{ "%.2f"|format(pedido.frete) }}</p>
+            <h3 class="total">TOTAL: R$ {{ "%.2f"|format(pedido.total) }}</h3>
+        </div>
+        {% endif %}
+    </div>
+
+</body>
+</html>
